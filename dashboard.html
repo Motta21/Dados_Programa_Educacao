@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amaná — Dashboard</title>
+    <script>
+    (function() {
+      const saved = sessionStorage.getItem('theme');
+      const html = document.documentElement;
+      html.setAttribute('data-theme', saved || 'light');
+    })();
+  </script>
+
+  <link rel="stylesheet" href="estilo.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/img/favicon_io/favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <aside class="sidebar collapsed" id="sidebar">
+    <div class="brand">
+      <button class="btn-icon toggle-sidebar" id="toggleSidebar"><i class="fa-solid fa-bars"></i></button>
+    </div>
+
+    <nav class="nav">
+            <a class="nav-link active" href="../index.html"><i class="fa-solid fa-cloud-sun-rain"></i><span>Início</span></a>
+            <a class="nav-link" href="dashboard.html"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+            <a class="nav-link" href="graficos.html"><i class="fa-solid fa-chart-line"></i><span>Gráficos</span></a>
+            <a class="nav-link" href="historico.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
+            <a class="nav-link" href="contato.html"><i class="fa-solid fa-address-book"></i><span>Contato</span></a>
+            <a class="nav-link" href="patrocinadores.html"><i class="fa-solid fa-handshake"></i><span>Parceiros</span></a>
+            <a class="nav-link" href="extensao.html"><i class="fa-solid fa-video"></i><span>Extensão</span></a>
+            <a class="nav-link" href="login.html"><i class="fa-solid fa-user"></i><span>Perfil</span></a>
+
+</a>
+        </nav>
+    
+  </aside>
+
+  <main class="content">
+    <header class="topbar">
+      <div class="topbar-left">
+        
+      </div>
+      <div class="topbar-right">
+    <!-- Botão usuário -->
+    
+
+    <!-- Botão tema -->
+    <button class="btn-icon" id="toggleTheme"><i class="fa-solid fa-moon"></i></button>
+
+    <!-- Relógio -->
+    <div class="clock" id="hora">--:--:--</div>
+  </div>
+    </header>
+<h1>Central de Coleta de Dados Ambientais</h1>
+        <p class="subtitle">Monitoramento em tempo real com análise visual</p>
+    <div class="section-actions">
+      <label for="estacao" class="input-select">Estação:</label>
+            <select id="estacao">
+              <option value="1">Estação 1</option>
+              <option value="2">Estação 2</option>
+    </select>
+    </div>
+
+    <section id="dashboard" class="section">
+      <div class="cards">
+        <div class="card metric" id="card-temp">
+          <div class="metric-head"><i class="fa-solid fa-temperature-three-quarters metric-icon"></i><span>Temperatura</span></div>
+          <div class="metric-value" id="tempValor">-- °C</div>
+          <div class="metric-foot"><span id="temp-status">—</span></div>
+          <div class="metric-sub" id="alerta-temp"></div>
+        </div>
+        <div class="card metric" id="card-umid">
+          <div class="metric-head"><i class="fa-solid fa-droplet metric-icon"></i><span>Umidade</span></div>
+          <div class="metric-value" id="umidadeValor">-- %</div>
+          <div class="metric-foot"><span id="umid-status">—</span></div>
+          <div class="metric-sub" id="alerta-umidade"></div>
+        </div>
+        <div class="card metric" id="card-pressao">
+          <div class="metric-head"><i class="fa-solid fa-gauge-high metric-icon"></i><span>Pressão</span></div>
+          <div class="metric-value" id="pressaoValor">-- hPa</div>
+          <div class="metric-foot"><span id="pressao-status">—</span></div>
+          <div class="metric-sub" id="alerta-pressao"></div>
+        </div>
+        <div class="card metric" id="card-pressao-nm">
+          <div class="metric-head"><i class="fa-solid fa-water metric-icon"></i><span>Pressão Nível do Mar</span></div>
+          <div class="metric-value" id="pressaoNMValor">-- hPa</div>
+          <div class="metric-foot"><span id="orvalhoValor">—</span></div>
+        </div>
+        <div class="card metric" id="card-orvalho">
+          <div class="metric-head"><i class="fa-solid fa-snowflake metric-icon"></i><span>Ponto de Orvalho</span></div>
+          <div class="metric-value" id="orvalho-atual">-- °C</div>
+          <div class="metric-foot"><span id="orvalho-status">—</span></div>
+        </div>
+        <div class="card metric" id="card-bateria">
+          <div class="metric-head"><i class="fa-solid fa-bolt"></i><span>Bateria</span></div>
+          <div class="metric-value" id="bateriaValor">-- V</div>
+          <div class="metric-foot"><span id="alerta-bateria">—</span></div>
+        </div>
+      </div>
+    </section>
+    <div id="map" style="height: 400px; width: 100%;">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+      <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    </div>
+    <script>
+    const lat = -22.68492969921566
+    const lng = -45.00812709331513;
+
+    const map = L.map('map').setView([lat, lng], 16);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+    L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup("Central Coleta de Dados")
+        .openPopup();
+</script>
+
+    <footer class="footer">
+      <span>&copy; 2025 Amaná — Central de Coleta de Dados Ambientais</span>
+    </footer>
+  </main>
+
+  <div id="loader" class="loader hidden"><div class="spinner"></div><span>Carregando dados...</span></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+
+  <!--REcurso para atualizar a dashboard | temporario -->
+  <script>
+function formatNumero(valor, casas = 2) {
+    return Number(valor).toFixed(casas);
+}
+
+function gerarAlertaTemperatura(temp) {
+    if (temp >= 35) return { msg: "Temperatura elevada", cor: "red" };
+    if (temp <= 10) return { msg: "Temperatura muito baixa", cor: "blue" };
+    return { msg: "Temperatura normal", cor: "green" };
+}
+
+function gerarAlertaUmidade(um) {
+    if (um < 30) return { msg: "Umidade baixa", cor: "orange" };
+    if (um > 80) return { msg: "Umidade muito alta", cor: "red" };
+    return { msg: "Umidade ideal", cor: "green" };
+}
+
+function gerarAlertaPressao(pr) {
+    if (pr < 1000) return { msg: "Pressão baixa", cor: "orange" };
+    if (pr > 1025) return { msg: "Pressão alta", cor: "red" };
+    return { msg: "Pressão normal", cor: "green" };
+}
+
+function gerarAlertaBateria(bat) {
+    if (bat < 9) return { msg: "Voltagem Baixa", cor: "red" };
+    if (bat > 13) return { msg: "Voltagem Acima", cor: "red" };
+    return { msg: "Bateria normal", cor: "green" };
+}
+
+async function carregarUltimosDados() {
+    const codE = document.getElementById("estacao").value;
+
+    try {
+        const resposta = await fetch(`php/dados_atualizados.php?Cod_E=${codE}`);
+        const json = await resposta.json();
+
+        if (!json.sucesso) {
+            mostrarErro(json.erro);
+            return;
+        }
+
+        const d = json.dados;
+
+        // Valores formatados
+        const temp = formatNumero(d.Temperatura);
+        const umid = parseInt(d.Umidade);
+        const press = parseInt(d.Pressao);
+        const pressNM = parseInt(d.Pressao_nivel_mar);
+        const orvalho = formatNumero(d.PTO_Orvalho);
+        const bateria = formatNumero(d.NV_Bat);
+
+        // Preenche valores
+        document.getElementById("tempValor").textContent = `${temp} °C`;
+        document.getElementById("umidadeValor").textContent = `${umid}%`;
+        document.getElementById("pressaoValor").textContent = `${press} hPa`;
+        document.getElementById("pressaoNMValor").textContent = `${pressNM} hPa`;
+        document.getElementById("orvalho-atual").textContent = `${orvalho} °C`;
+        document.getElementById("bateriaValor").textContent = `${bateria} V`;
+
+
+        const alertaTemp = gerarAlertaTemperatura(Number(d.Temperatura));
+        const alertaUmid = gerarAlertaUmidade(umid);
+        const alertaPress = gerarAlertaPressao(Number(d.Pressao));
+        const alertaBat = gerarAlertaBateria(Number(d.bateria));
+
+        document.getElementById("alerta-temp").textContent = alertaTemp.msg;
+        document.getElementById("alerta-temp").style.color = alertaTemp.cor;
+
+        document.getElementById("alerta-umidade").textContent = alertaUmid.msg;
+        document.getElementById("alerta-umidade").style.color = alertaUmid.cor;
+
+        document.getElementById("alerta-pressao").textContent = alertaPress.msg;
+        document.getElementById("alerta-pressao").style.color = alertaPress.cor;
+
+       document.getElementById("alerta-bateria").textContent = alertaBat.msg;
+       document.getElementById("alerta-bateria").style.color = alertaBat.cor;
+
+    } catch (e) {
+        mostrarErro("Erro ao carregar dados");
+        console.error(e);
+    }
+}
+
+function mostrarErro(msg) {
+    const toast = document.getElementById("toast");
+    toast.textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 3000);
+}
+
+document.getElementById("estacao").addEventListener("change", carregarUltimosDados);
+carregarUltimosDados();
+setInterval(carregarUltimosDados, 600000); // 10 minutos
+</script>
+
+
+</body>
+</html>
