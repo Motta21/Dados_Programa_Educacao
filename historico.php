@@ -81,6 +81,8 @@ try {
       <a class="nav-link active" href="dashboard.html"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
       <a class="nav-link" href="graficos.html"><i class="fa-solid fa-chart-line"></i><span>Gráficos</span></a>
       <a class="nav-link active" href="historico.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
+      
+      <img src="/img/logo_prog_inpe" alt="Descrição da Imagem">
 
         </nav>
     
