@@ -3,7 +3,7 @@ header("Content-Type: application/json; charset=utf-8");
 require_once "db_conection.php";
 
 // Garante que sempre teremos um número inteiro
-$codE = isset($_GET['Cod_E']) ? intval($_GET['Cod_E']) : 1;
+$codE = isset($_GET['Cod_E']) ? intval($_GET['Cod_E']) : 2;
 
 try {
     $sql = "SELECT * 
