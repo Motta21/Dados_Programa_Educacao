@@ -82,7 +82,7 @@ try {
       <a class="nav-link" href="../html/dashboard.html"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
       <a class="nav-link" href="../html/graficos.html"><i class="fa-solid fa-chart-line"></i><span>Gráficos</span></a>
       <a class="nav-link active" href="historico.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
-      <img src="/img/logo_programa.png" alt="Logo Programa Educação" class="sidebar-logo">
+      <img src="../img/logo_programa.png" alt="Logo Programa Educação" class="sidebar-logo">
     </nav>
   </aside>
 
@@ -92,8 +92,8 @@ try {
       </div>
 <div class="topbar-right">
   <div class="topbar-logos">
-    <img src="/img/logo_inpe.png" alt="INPE">
-    <img src="/img/logo_programa.png" alt="Programa Educação">
+    <img src="../img/logo_inpe.png" alt="INPE">
+    <img src="../img/logo_programa.png" alt="Programa Educação">
   </div>
 
   <button class="btn-icon" id="toggleTheme">
