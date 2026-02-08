@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /js/script.js
+Disallow: /js/grafico.js
+Disallow: /php/

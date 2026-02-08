@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados Programa Educação — Dashboard</title>
+    
+    <script>
+        (function() {
+            const saved = sessionStorage.getItem('theme');
+            const html = document.documentElement;
+            html.setAttribute('data-theme', saved || 'light');
+        })();
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projeto/estilo.css"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/estilo.css"> 
+    <link rel="stylesheet" href="../css/index.css"> 
+    <link rel="shortcut icon" href="/img/favicon_io/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <aside class="sidebar collapsed" id="sidebar">
+        <div class="brand">
+            <button class="btn-icon toggle-sidebar" id="toggleSidebar"><i class="fa-solid fa-bars"></i></button>
+        </div>
+
+        <nav class="nav">
+            <a class="nav-link active" href="index.html"><i class="fa-solid fa-cloud-sun-rain"></i><span>Início</span></a>
+            <a class="nav-link" href="html/dashboard.html"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a>
+            <a class="nav-link" href="html/graficos.html"><i class="fa-solid fa-chart-line"></i><span>Gráficos</span></a>
+            <a class="nav-link" href="php/historico.php"><i class="fa-solid fa-clock-rotate-left"></i><span>Histórico</span></a>
+            <img src="/img/logo_programa.png" alt="Logo Programa Educação" class="sidebar-logo">
+</nav>
+        
+    </aside>
+
+    <main class="content">
+        
+        <header class="topbar">
+            <div class="topbar-left">
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-logos">
+                <img src="/img/logo_inpe.png" alt="INPE">
+                <img src="/img/logo_programa.png" alt="Programa Educação">
+            </div>
+                <button class="btn-icon" id="toggleTheme"><i class="fa-solid fa-moon"></i></button>
+
+                <div class="clock" id="hora">--:--:--</div>
+            </div>
+        </header>
+
+        <div class="landing-page-wrapper">
+            <div class="background-weather-icons">
+    <i class="floating-icon cloud-tl fa-solid fa-cloud"></i>
+    
+    <i class="floating-icon sun-tr fa-solid fa-sun"></i>
+    
+    <i class="floating-icon wind-bl fa-solid fa-wind"></i>
+    
+    <i class="floating-icon cloud-br fa-solid fa-cloud-showers-heavy"></i>
+</div>
+
+            <section id="welcome-section" class="full-height">
+                <div class="weather-monitor-container">
+                    <div class="center-icons">
+                        <i class="fa-solid fa-cloud fa-2x" style="color: var(--cloud-color);"></i>
+                        <i class="fa-solid fa-sun fa-2x" style="color: var(--sun-color);"></i>
+                        <i class="fa-solid fa-cloud-showers-heavy fa-2x" style="color: var(--rain-color);"></i>
+                    </div>
+                    <h1 class="title-welcome">Seja bem vindo a</h1>
+                    <p class="app-name">Central de dados!</p>
+                    <p class="subtitle-description">Uma pagina dedicada aos dados das estações de baixo custo do Programa Educação - INPE</p>
+                    
+                    <div class="loading-dot"></div>
+                    
+                    <p class="scroll-prompt">Role para baixo para descobrir mais ⬇️</p>
+                </div>
+            </section>
+
+                <div class="carousel-container">
+        <div class="carousel-images" id="carouselImages">
+                        <div class="carousel-slide">
+            <h1>Módulo SD</h1>
+            <img src="img/imagens-componentes/1t.png" alt="Imagem do Módulo SD" class="carousel-image" title="Imagem do Módulo SD">
+        </div>
+                        <div class="carousel-slide">
+                            <h1>Bateria</h1>
+                                        <img src="img/imagens-componentes/2t.png" alt="Imagem da Bateria" class="carousel-image" title="Imagem da Bateria">
+                        </div>
+                        <div class="carousel-slide">
+                            <h1>Controlador de carga</h1>
+                                        <img src="img/imagens-componentes/3t.png" alt="Imagem do Controlador de carga solar" class="carousel-image" title="Imagem do Controlador de carga solar">
+                        </div>
+                        <div class="carousel-slide">
+                            <h1>ESP-32</h1>
+                                        <img src="img/imagens-componentes/4t.png" alt="Imagem do ESP32" class="carousel-image" title="Imagem do ESP32">
+                        </div>
+                        <div class="carousel-slide">
+                            <h1>Sensor</h1>
+                                        <img src="img/imagens-componentes/5t.png" alt="Imagem do Sensor de temperatura" class="carousel-image" title="Imagem do Sensor de temperatura">
+                        </div>
+                        <div class="carousel-slide">
+                            <h1>Regulador de tensão</h1>
+                                        <img src="img/imagens-componentes/6t.png" alt="Imagem do Regulador de tensão" class="carousel-image" title="Imagem do Regulador de tensão">
+                        </div>
+                        <div class="carousel-slide">
+                            <h1>Módulo RTC</h1>
+                                        <img src="img/imagens-componentes/7t.png" alt="Imagem do Módulo RTC" class="carousel-image" title="Imagem do Módulo RTC">
+                        </div>
+            
+        </div>
+        <div class="carousel-controls">
+            <button class="btn-icon" id="prevButton"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="btn-icon" id="nextButton"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        </div>
+
+<!-- Adicione após o carrossel -->
+<section class="info-section">
+    <h2>Estação meteorológica?</h2>
+    <p>Estações meteorológicas são ferramentas utilizadas por meteorologistas, agricultores, empresas e todos que desejam acompanhar dados meteorológicos. Seja temperatura, umidade, velocidade do vento entre outros.</p>
+
+  <h2>Por que uma Estação Meteorológica de Baixo Custo?</h2>
+  <p>
+    Estações meteorológicas acessíveis democratizam o acesso à ciência e à tecnologia, permitindo que escolas, comunidades e pesquisadores monitorem o clima local de forma eficiente e econômica. Elas promovem educação prática, cidadania e engajamento ambiental.
+  </p>
+
+  <h3>O papel do Arduino, ESP32 e Sensores</h3>
+  <ul>
+    <li>
+      <strong>Arduino:</strong> Plataforma aberta, fácil de programar e ideal para projetos educacionais e prototipagem rápida.
+    </li>
+    <li>
+      <strong>ESP32:</strong> Microcontrolador potente com conectividade Wi-Fi/Bluetooth, permitindo integração com plataformas online e automação.
+    </li>
+    <li>
+      <strong>Sensores:</strong> Diversos tipos (temperatura, umidade, pressão, chuva, vento) tornam possível coletar dados ambientais precisos e em tempo real.
+    </li>
+  </ul>
+
+</section>
+        
+
+ <footer class="footer">
+      <span>&copy; 2025 Amaná — Central de Coleta de Dados Ambientais</span>
+    </footer>
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
