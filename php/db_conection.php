@@ -16,5 +16,4 @@ try {
     die("Erro na conexão com o banco de dados: " . $e->getMessage());
 }
 
-// A partir daqui, a variável $pdo está disponível para qualquer script que incluir este arquivo.
 ?>

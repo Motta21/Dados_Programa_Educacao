@@ -16,7 +16,7 @@ async function carregarDados(periodo) {
         const estacao = estacaoElement ? estacaoElement.value : 1; 
 
         // Faz o pedido para o PHP enviando PERIODO e COD_E
-        const resposta = await fetch(`php/dados_grafico.php?periodo=${periodo}&cod_e=${estacao}`);  
+        const resposta = await fetch(`../php/dados_grafico.php?periodo=${periodo}&cod_e=${estacao}`);  
         const json = await resposta.json();
 
         if (!json.sucesso) {
