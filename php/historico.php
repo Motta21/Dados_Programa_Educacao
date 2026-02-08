@@ -123,8 +123,8 @@ try {
         </div>
 
         <select name="cod_e" id="estacao" class="input-select">
-        <option value="1" <?= ($cod_e == 1 ? 'selected' : '') ?>>Estação 1</option>
-        <option value="2" <?= ($cod_e == 2 ? 'selected' : '') ?>>Estação 2</option>
+        <option value="1" <?= ($cod_e == 1 ? 'selected' : '') ?>>Estação AMANA</option>
+        <option value="2" <?= ($cod_e == 2 ? 'selected' : '') ?>>Estação INPE</option>
     </select>
 
 
