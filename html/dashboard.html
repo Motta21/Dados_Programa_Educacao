@@ -169,7 +169,7 @@ async function carregarUltimosDados() {
     const codE = document.getElementById("estacao").value;
 
     try {
-        const resposta = await fetch(`php/dados_atualizados.php?Cod_E=${codE}`);
+        const resposta = await fetch(`../php/dados_atualizados.php?Cod_E=${codE}`);
         const json = await resposta.json();
 
         if (!json.sucesso) {
